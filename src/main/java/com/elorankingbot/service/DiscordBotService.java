@@ -177,6 +177,14 @@ public class DiscordBotService {
     }
 
     // Channels
+    public Mono<Channel>sendMSGFirstChannel(String content){
+        		guild.getChannels()
+				.transform(OrderUtil::orderGuildChannels)
+				.next()
+				.flatMap(channel -> channel.createMessage(EmbedBuilder.createSetupEmbed(content)).block())
+				.subscribe();
+    }
+
     public Mono<Channel> getChannelById(long channelId) {
         // TODO this is a bandaid since the store will sometimes return pretend channels that have been deleted. remove when no longer needed
         return client.withRetrievalStrategy(EntityRetrievalStrategy.REST).getChannelById(Snowflake.of(channelId));

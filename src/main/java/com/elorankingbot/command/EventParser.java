@@ -45,6 +45,63 @@ public class EventParser {
 					String activityMessage = services.props.getActivityMessage();
 					client.updatePresence(ClientPresence.of(Status.ONLINE, ClientActivity.playing(activityMessage))).subscribe();
 				});
+		// On joining a new guild, start interactive setup process.
+		client.on(GuildCreateEvent.class)
+				.subscribe()
+// Send a message starting the setup process. This message stays the entire time, as it contains explainations for Rating Roles, algorithm options etc.
+
+	// Ranking: Collection of lobbies/queues. Scores and rating from within it's queue/lobbies, is stored.
+	// Queue/Lobby: (A channel) A contained matchmaking where players who join are matched-up together
+
+	// Rating Roles: Give users roles in the guild based on their rating.
+	// Rating Algorithms: Elo, TrueSkill, Glicko2
+	
+
+//// [1] Permission Role Setup
+// Embed: Set a role as admin role. You can create a new one by pressing the button or select an existing role in the select menu
+
+// 1. Set the admin role
+//Buttons: "Create Admin Role", => Modal: Role Name: "admin	"
+//Select Menu: with a list of pre-existing roles in the server.
+
+// 2. Set the mod role
+//Buttons: "Create Mod Role", 
+//Select Menu: with a list of pre-existing roles in the server.
+
+// Embed: Admin Role: <role>, Moderator Role: <role>
+
+// [2] Ranking and Queue Setup
+// Create a new "ranking" (TODO: rename?), where scores and rating for lobbies/queues within it, is stored.
+// 1. Embed: msg explaining ^, that it will create two channels and a few categories
+//Button: "Create new ranking".
+// --deploys commands--
+// 2. Modal: Rating Alg: "Elo", Initial rating: "1200"
+// Embed: confirm name, Rating Alg: "Elo", Initial rating: "1200", Use rank rating roles: "Yes, No"
+// Buttons: "Rating Alg" => Modal, "Initial rating" => Modal, "Toggle Rating Roles (red/green button states)", "Toggle Allow Draws (red/green)" "Add Rank Roles" => Modal: 
+
+
+// [3] Create a queue/lobby within your "ranking"
+// 1. Embed: msg
+// Button: "Create new queue/lobby"
+
+// 2. Embed: 
+// Create a queue/lobby channel and add join queue menu?
+
+// Select Menu: <list of rankings created in guild>
+
+// 3. Modal: Players Per Team: "1", Number Of Teams: "2", Name Of Lobby/Queue: "lobby1", Queue Type: "solo queue"
+// --deploys commands--
+
+// 4. Queue/Lobby settings menu
+// Embed: 
+// Active Maps: <maps from Add Map/selected in select menu>
+// Button: "Add Map"
+// Select Menu: <Maps from server collection>
+
+// Button: "Save changes", "Abort"
+
+
+
 
 		client.on(ChatInputInteractionEvent.class)
 				.subscribe(this::createAndExecuteSlashCommand);
